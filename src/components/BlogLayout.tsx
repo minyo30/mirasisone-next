@@ -5,7 +5,7 @@ type BlogShellProps = {
   children: ReactNode;
 };
 
-export function BlogShell({ children }: BlogShellProps) {
+export function SiteShell({ children }: BlogShellProps) {
   return (
     <main className="blog-shell">
       <div className="blog-bg" aria-hidden="true" />
@@ -13,9 +13,11 @@ export function BlogShell({ children }: BlogShellProps) {
         <Link className="blog-logo" href="/">
           MIRASISONE
         </Link>
-        <nav aria-label="Blog navigation">
+        <nav aria-label="Site navigation">
+          <Link href="/company">COMPANY</Link>
           <Link href="/works">WORKS</Link>
           <Link href="/blog">BLOG</Link>
+          <Link href="/recruit">RECRUIT</Link>
           <Link href="/contact">CONTACT</Link>
         </nav>
       </header>
@@ -23,3 +25,5 @@ export function BlogShell({ children }: BlogShellProps) {
     </main>
   );
 }
+
+export const BlogShell = SiteShell;

@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         destination: "/works",
         permanent: true,
       },
+      {
+        source: "/privacy-polic",
+        destination: "/privacy-policy",
+        permanent: true,
+      },
     ];
   },
 };
