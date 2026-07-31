@@ -1,65 +1,71 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteShell } from "@/components/BlogLayout";
+import { LegacyPageShell } from "@/components/LegacyPageLayout";
 
 export const metadata: Metadata = {
   title: "COMPANY",
   description:
-    "MIRASISONEの会社情報です。空間演出、プロジェクションマッピング、3DCG、AR・XRコンテンツ制作を通じて、体験価値を設計します。",
+    "プロジェクションマッピングや3DCG制作を手掛けるMIRASISONEの会社概要、ミッション、ビジョン、バリューを紹介します。",
   alternates: {
     canonical: "/company",
   },
   openGraph: {
     title: "COMPANY | MIRASISONE",
     description:
-      "MIRASISONEの会社情報です。空間演出、プロジェクションマッピング、3DCG、AR・XRコンテンツ制作を通じて、体験価値を設計します。",
+      "プロジェクションマッピングや3DCG制作を手掛けるMIRASISONEの会社概要、ミッション、ビジョン、バリューを紹介します。",
     url: "/company",
   },
 };
 
 const companyRows = [
-  ["会社名", "MIRASISONE"],
-  ["事業内容", "プロジェクションマッピング、3DCG映像制作、AR・XRコンテンツ、イマーシブ空間演出、デジタルサイネージ、空間体験の企画・制作・運用"],
-  ["対応領域", "飲食店、商業施設、ホテル、イベント、展示会、ミュージアム、ブランドプロモーション"],
-  ["所在地", "東京都"],
+  ["屋号", "MIRASISONE"],
+  ["代表", "山田 晃平"],
+  ["所在地", "〒107-0061 東京都港区北青山一丁目3番1号 アールキューブ青山3階"],
   ["お問い合わせ", "info@mirasisone.co.jp"],
+  [
+    "事業内容",
+    "プロジェクションマッピング制作、3DCG映像制作、VR・AR・XRコンテンツ制作、デジタルサイネージ、空間演出、イベント演出、広告映像制作",
+  ],
+];
+
+const values = [
+  ["Creative", "人の感情を動かす演出を、企画と映像の両面から設計します。"],
+  ["Technology", "投影、3DCG、インタラクティブ技術を組み合わせ、空間に最適な表現を実装します。"],
+  ["Experience", "ただ映すだけではなく、記憶に残る体験として完成させます。"],
 ];
 
 export default function CompanyPage() {
   return (
-    <SiteShell>
-      <section className="subpage-hero">
-        <p className="blog-kicker">COMPANY</p>
-        <h1>
-          空間の価値を、
-          <br />
-          体験として設計する。
-        </h1>
-        <p>
-          MIRASISONEは、光と映像、3DCG、インタラクティブ技術を組み合わせ、
-          施設やブランドの記憶に残る体験を企画から実装まで支援します。
-        </p>
+    <LegacyPageShell>
+      <section className="legacy-hero legacy-hero-company">
+        <p>ABOUT US</p>
+        <h1>COMPANY</h1>
       </section>
 
-      <section className="subpage-panel">
-        <div className="subpage-heading">
-          <p className="blog-kicker">MISSION</p>
-          <h2>ただ映すだけではない、感情が動くシーンをつくる。</h2>
+      <section className="legacy-section legacy-two-column">
+        <div>
+          <p className="legacy-kicker">TOP MESSAGE</p>
+          <h2>
+            空間の価値を、
+            <br />
+            体験へ変える。
+          </h2>
         </div>
-        <p>
-          プロジェクションマッピングや3DCG映像は、空間の見え方を変えるだけでなく、
-          訪れた人の期待、驚き、記憶を動かすための設計です。
-          MIRASISONEは、企画、制作、設置、運用までを一体で考え、
-          ビジネスに新しい体験価値を生み出します。
-        </p>
+        <div className="legacy-copy">
+          <p>
+            MIRASISONEは、プロジェクションマッピング、3DCG、VR・AR・XRなどの技術を活用し、
+            空間そのものの価値を高める体験をつくるクリエイティブチームです。
+          </p>
+          <p>
+            店舗、イベント、展示、商業施設など、目的や場所に合わせて企画から制作、現場実装まで伴走します。
+            映像をただ映すのではなく、そこにいる人の感情が動く瞬間を設計します。
+          </p>
+        </div>
       </section>
 
-      <section className="subpage-panel">
-        <div className="subpage-heading">
-          <p className="blog-kicker">PROFILE</p>
-          <h2>会社概要</h2>
-        </div>
-        <dl className="info-list">
+      <section className="legacy-section">
+        <p className="legacy-kicker">COMPANY INFO</p>
+        <h2>会社概要</h2>
+        <dl className="legacy-table">
           {companyRows.map(([label, value]) => (
             <div key={label}>
               <dt>{label}</dt>
@@ -69,10 +75,35 @@ export default function CompanyPage() {
         </dl>
       </section>
 
-      <section className="subpage-cta">
-        <p>空間演出や映像制作のご相談は、構想段階からお気軽にお問い合わせください。</p>
-        <Link href="/contact">CONTACT US</Link>
+      <section className="legacy-section legacy-split-cards">
+        <article>
+          <p className="legacy-kicker">MISSION</p>
+          <h2>映像と空間で、体験価値を拡張する。</h2>
+          <p>
+            光、映像、音、導線を一体で考え、来場者や顧客の記憶に残るシーンを創出します。
+          </p>
+        </article>
+        <article>
+          <p className="legacy-kicker">VISION</p>
+          <h2>空間演出を、もっと身近な選択肢へ。</h2>
+          <p>
+            特別な大型イベントだけではなく、飲食店、ホテル、商業施設、地域の場にも体験設計を届けます。
+          </p>
+        </article>
       </section>
-    </SiteShell>
+
+      <section className="legacy-section">
+        <p className="legacy-kicker">VALUES</p>
+        <h2>大切にしていること</h2>
+        <div className="legacy-value-grid">
+          {values.map(([title, body]) => (
+            <article key={title}>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </LegacyPageShell>
   );
 }
