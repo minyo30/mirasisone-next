@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BlogShell } from "@/components/BlogLayout";
 import { blogPosts, getBlogPost } from "@/content/blog";
 
 type BlogPostPageProps = {
@@ -52,29 +51,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const related = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
-    <BlogShell>
-      <article className="post-article">
-        <Link className="post-back" href="/blog">
-          BLOG
+    <main className="wix-blog-page">
+      <article className="wix-article">
+        <Link className="wix-article-back" href="/blog">
+          All Posts
         </Link>
-        <p className="blog-kicker">{post.category}</p>
+        <div className="wix-article-meta">
+          <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+          <span>•</span>
+          <Link href="/blog">{post.category}</Link>
+        </div>
         <h1>{post.title}</h1>
-        <p className="post-description">{post.description}</p>
-        <div className="post-meta">
-          <time dateTime={post.publishedAt}>公開日 {post.publishedAt}</time>
-          <time dateTime={post.revisedAt}>更新日 {post.revisedAt}</time>
+        <p className="wix-article-lead">{post.description}</p>
+        <div className="wix-article-image">
+          <Image src={post.eyecatch} alt="" fill sizes="(max-width: 900px) 100vw, 860px" priority />
         </div>
-        <div className="post-eyecatch">
-          <Image src={post.eyecatch} alt="" fill sizes="(max-width: 760px) 100vw, 980px" priority />
-        </div>
-        <div className="post-body">
+        <div className="wix-article-body">
           {post.content.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
       </article>
 
-      <section className="post-related" aria-label="関連記事">
+      <section className="wix-related" aria-label="関連記事">
         <h2>関連記事</h2>
         <div>
           {related.map((item) => (
@@ -85,6 +84,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           ))}
         </div>
       </section>
-    </BlogShell>
+    </main>
   );
 }

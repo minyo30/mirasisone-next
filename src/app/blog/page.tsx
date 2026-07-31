@@ -1,75 +1,80 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { BlogShell } from "@/components/BlogLayout";
-import { blogCategories, blogPosts } from "@/content/blog";
+import { blogNavCategories, blogPosts } from "@/content/blog";
 
 export const metadata: Metadata = {
-  title: "BLOG",
+  title: "TOPICS・NEWS",
   description:
-    "プロジェクションマッピング、3DCG映像制作、AR・XR、空間演出に関するMIRASISONEのブログ記事一覧です。",
+    "MIRASISONEのブログ記事一覧です。プロジェクションマッピング、3D映像制作、デジタルサイネージ、空間演出に関する記事を掲載しています。",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "BLOG | MIRASISONE",
+    title: "TOPICS・NEWS | MIRASISONE",
     description:
-      "プロジェクションマッピング、3DCG映像制作、AR・XR、空間演出に関するブログ記事一覧です。",
+      "MIRASISONEのブログ記事一覧です。プロジェクションマッピング、3D映像制作、デジタルサイネージ、空間演出に関する記事を掲載しています。",
     url: "/blog",
   },
 };
 
+function relativeDate(index: number) {
+  if (index === 0) {
+    return "1日前";
+  }
+
+  if (index === 1) {
+    return "3日前";
+  }
+
+  return blogPosts[index]?.publishedAt ?? "";
+}
+
 export default function BlogPage() {
-  const featured = blogPosts.slice(0, 4);
-  const rest = blogPosts.slice(4, 16);
+  const visiblePosts = blogPosts.slice(0, 14);
 
   return (
-    <BlogShell>
-      <section className="blog-hero">
-        <p className="blog-kicker">MIRASISONE JOURNAL</p>
-        <h1>空間体験を、言葉でも設計する。</h1>
-        <p>
-          プロジェクションマッピング、3DCG、AR・XR、イマーシブ空間演出の知見を、
-          実装前の検討に役立つ記事として整理しています。
-        </p>
-      </section>
-
-      <section className="blog-categories" aria-label="カテゴリ">
-        {blogCategories.slice(0, 8).map((category) => (
-          <span key={category}>{category}</span>
+    <main className="wix-blog-page" id="top">
+      <nav className="wix-blog-nav" aria-label="Blog categories">
+        {blogNavCategories.map((category) => (
+          <Link href="/blog" key={category}>
+            {category}
+          </Link>
         ))}
-      </section>
+        <button type="button" aria-label="続きを読む">
+          続きを読む
+          <span aria-hidden="true">⌄</span>
+        </button>
+      </nav>
 
-      <section className="blog-grid" aria-label="記事一覧">
-        {featured.map((post, index) => (
-          <article className={index === 0 ? "blog-card blog-card-large" : "blog-card"} key={post.slug}>
-            <Link href={`/post/${encodeURIComponent(post.slug)}`}>
-              <div className="blog-card-image">
-                <Image src={post.eyecatch} alt="" fill sizes="(max-width: 760px) 100vw, 50vw" />
-              </div>
-              <div className="blog-card-body">
-                <p className="blog-card-meta">
-                  {post.category} / {post.publishedAt}
-                </p>
-                <h2>{post.title}</h2>
-                <p>{post.description}</p>
-              </div>
+      <section className="wix-post-list" aria-label="ブログ記事一覧">
+        {visiblePosts.map((post, index) => (
+          <article className="wix-post-card" key={`${post.slug}-${index}`}>
+            <Link className="wix-post-image" href={`/post/${encodeURIComponent(post.slug)}`}>
+              <Image src={post.eyecatch} alt="" fill sizes="(max-width: 900px) 100vw, 454px" priority={index === 0} />
             </Link>
+            <div className="wix-post-body">
+              <div className="wix-post-topline">
+                <span>{relativeDate(index)}</span>
+                <button type="button" aria-label="記事メニュー">
+                  ⋮
+                </button>
+              </div>
+              <Link className="wix-post-category" href="/blog">
+                {post.category}
+              </Link>
+              <Link className="wix-post-title" href={`/post/${encodeURIComponent(post.slug)}`}>
+                {post.title}
+              </Link>
+              <p>{post.description}</p>
+            </div>
           </article>
         ))}
       </section>
 
-      <section className="blog-list" aria-label="その他の記事">
-        {rest.map((post) => (
-          <article key={post.slug}>
-            <Link href={`/post/${encodeURIComponent(post.slug)}`}>
-              <span>{post.category}</span>
-              <h2>{post.title}</h2>
-              <time dateTime={post.publishedAt}>{post.publishedAt}</time>
-            </Link>
-          </article>
-        ))}
-      </section>
-    </BlogShell>
+      <a className="wix-page-top" href="#top" aria-label="ページ上部へ戻る">
+        ⌃
+      </a>
+    </main>
   );
 }
