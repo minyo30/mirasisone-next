@@ -77,6 +77,7 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
 
     const injectedScripts: HTMLScriptElement[] = [];
     const cleanups: Array<() => void> = [];
+    const timeouts: number[] = [];
     let cancelled = false;
 
     function ensureProjectionValueHover() {
@@ -86,7 +87,30 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
 
       if (!items.length || !images.length) return;
 
-      function activate(index: string | undefined) {
+      function playImageMotion(image: HTMLElement) {
+        const sweepFilter = image.closest(".str2-images")?.querySelector<HTMLElement>(
+          ":scope > .img-reveal-filter",
+        );
+
+        image.classList.remove("is-filtering");
+        sweepFilter?.classList.remove("is-sweeping");
+
+        void image.offsetWidth;
+        if (sweepFilter) {
+          void sweepFilter.offsetWidth;
+        }
+
+        image.classList.add("is-filtering");
+        sweepFilter?.classList.add("is-sweeping");
+
+        const timeout = window.setTimeout(() => {
+          image.classList.remove("is-filtering");
+          sweepFilter?.classList.remove("is-sweeping");
+        }, 1000);
+        timeouts.push(timeout);
+      }
+
+      function activate(index: string | undefined, motion = true) {
         if (!index) return;
 
         items.forEach((item) => {
@@ -98,6 +122,9 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
           image.classList.toggle("is-active", active);
           if (active) {
             image.classList.add("is-visible");
+            if (motion) {
+              playImageMotion(image);
+            }
           }
         });
 
@@ -106,7 +133,7 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
         }
       }
 
-      activate(items[0]?.dataset.img ?? "0");
+      activate(items[0]?.dataset.img ?? "0", false);
 
       items.forEach((item) => {
         const onEnter = () => activate(item.dataset.img);
@@ -152,6 +179,7 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
 
     return () => {
       cancelled = true;
+      timeouts.forEach((timeout) => window.clearTimeout(timeout));
       cleanups.forEach((cleanup) => cleanup());
       injectedScripts.forEach((script) => script.remove());
     };
