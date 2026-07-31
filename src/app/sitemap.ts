@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { seoUrlInventory } from "@/content/seo-url-inventory";
 
 const baseUrl = "https://www.mirasisone.com";
-const implementedPaths = new Set(["/", "/works", "/contact"]);
+const implementedPaths = new Set(["/", "/works", "/contact", "/blog"]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const fixedPages = seoUrlInventory

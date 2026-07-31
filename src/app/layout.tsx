@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | MIRASISONE",
   },
   description:
-    "MIRASISONEは、プロジェクションマッピング・3DCG・AR / XRを活用し、空間体験の企画から制作・実装まで支援します。",
+    "MIRASISONEは、プロジェクションマッピング、3DCG、AR・XRを活用し、空間体験の企画から制作、実装まで支援します。",
   alternates: {
     canonical: "/",
   },
