@@ -12,11 +12,22 @@ Wix の `https://www.mirasisone.com/sitemap.xml` は以下の sitemap index を�
 
 | 種別 | URL | 状態 |
 | --- | --- | --- |
-| ブログ記事 | `https://www.mirasisone.com/blog-posts-sitemap.xml` | Wix 側 429 のため再取得待ち |
-| ブログカテゴリ | `https://www.mirasisone.com/blog-categories-sitemap.xml` | Wix 側 429 のため再取得待ち |
-| 固定ページ | `https://www.mirasisone.com/pages-sitemap.xml` | Wix 側 429 のため再取得待ち |
+| ブログ記事 | `https://www.mirasisone.com/blog-posts-sitemap.xml` | 取得済み |
+| ブログカテゴリ | `https://www.mirasisone.com/blog-categories-sitemap.xml` | 取得済み |
+| 固定ページ | `https://www.mirasisone.com/pages-sitemap.xml` | 取得済み |
 
 `robots.txt` は sitemap と `?lightbox=` の除外を指定している。Next.js 側でも同等設定を追加済み。
+
+## 棚卸し結果
+
+| 種別 | 件数 | 保存先 |
+| --- | ---: | --- |
+| 固定ページ | 7 | `docs/seo-url-inventory.csv` |
+| ブログ記事 | 83 | `docs/seo-url-inventory.csv` |
+| ブログカテゴリ | 10 | `docs/seo-url-inventory.csv` |
+| 合計 | 100 | `docs/seo-url-inventory.csv` |
+
+固定ページ・ブログカテゴリ・主要ブログ記事12件については、title / description / canonical / OGP の部分取得も完了。保存先は `docs/seo-metadata-inventory.partial.csv`。
 
 ## Next.js 側で実装済み
 
@@ -58,13 +69,12 @@ Wix の `https://www.mirasisone.com/sitemap.xml` は以下の sitemap index を�
 
 ## 推奨する次の実装
 
-1. Wix sitemap の 429 が解除されたら、3つのサブsitemapを再取得する。
-2. 取得した全URLを `docs/seo-url-inventory.csv` に保存する。
-3. ブログCMSを決める。更新頻度が高いなら microCMS が第一候補。
-4. `/blog`、`/blog/[slug]`、`/blog/categories/[category]` をNext.jsに追加する。
-5. 各記事に `generateMetadata` を実装する。
-6. 全記事URLを `sitemap.ts` に追加する。
-7. Vercelプレビューで `curl -I` と Search Console URL検査を行う。
+1. ブログCMSを決める。更新頻度が高いなら microCMS が第一候補。
+2. `/blog`、`/post/[slug]`、`/blog/categories/[...category]` をNext.jsに追加する。
+3. Wixから記事本文、アイキャッチ、カテゴリ、公開日、更新日を移す。
+4. 各記事に `generateMetadata` を実装する。
+5. ブログ移行後に全記事URLを `sitemap.ts` に追加する。
+6. Vercelプレビューで `curl -I` と Search Console URL検査を行う。
 
 ## 公開前チェックリスト
 
@@ -78,4 +88,3 @@ Wix の `https://www.mirasisone.com/sitemap.xml` は以下の sitemap index を�
 | 各ページ title が重複していない | 未 |
 | OGP画像が絶対URLで出る | 未 |
 | Search Console に sitemap を再送信 | 未 |
-

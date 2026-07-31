@@ -1,26 +1,25 @@
 import type { MetadataRoute } from "next";
+import { seoUrlInventory } from "@/content/seo-url-inventory";
 
 const baseUrl = "https://www.mirasisone.com";
+const implementedPaths = new Set(["/", "/works", "/contact"]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-07-31");
+  const fixedPages = seoUrlInventory
+    .filter((entry) => entry.type === "pages")
+    .filter((entry) => implementedPaths.has(entry.path))
+    .map((entry) => ({
+      url: `${baseUrl}${entry.path === "/" ? "" : entry.path}`,
+      lastModified: new Date(entry.lastmod || "2026-07-31"),
+      changeFrequency: "monthly" as const,
+      priority: entry.path === "/" ? 1 : 0.9,
+    }));
 
   return [
-    {
-      url: `${baseUrl}/`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/works`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
+    ...fixedPages,
     {
       url: `${baseUrl}/contact`,
-      lastModified,
+      lastModified: new Date("2026-07-31"),
       changeFrequency: "yearly",
       priority: 0.7,
     },
