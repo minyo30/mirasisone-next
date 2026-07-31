@@ -20,6 +20,39 @@ type StaticHtmlPageProps = {
   contactLinks?: boolean;
 };
 
+const pageLayoutOverrides = `
+  @media (max-width: 1180px) {
+    body .str2-section .str2-layout {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: clamp(20px, 4vw, 36px) !important;
+    }
+
+    body .str2-section .str2-list {
+      order: 1 !important;
+      width: 100% !important;
+    }
+
+    body .str2-section .str2-image-wrap {
+      order: 2 !important;
+      position: relative !important;
+      top: auto !important;
+      display: flex !important;
+      width: 100% !important;
+      height: clamp(280px, 48vw, 460px) !important;
+      margin-top: clamp(14px, 3vw, 28px) !important;
+      border-radius: 16px !important;
+      overflow: hidden !important;
+    }
+
+    body .str2-section .str2-images {
+      width: 100% !important;
+      height: 100% !important;
+      flex: none !important;
+    }
+  }
+`;
+
 function rewriteLinks(html: string, contactLinks = false) {
   let nextHtml = html
     .replaceAll("mirasisone-works-renewal.html#", "/#")
@@ -127,6 +160,7 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: page.style }} suppressHydrationWarning />
+      <style dangerouslySetInnerHTML={{ __html: pageLayoutOverrides }} suppressHydrationWarning />
       <div dangerouslySetInnerHTML={{ __html: body }} suppressHydrationWarning />
     </>
   );
