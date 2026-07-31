@@ -3,8 +3,21 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MIRASISONE",
-  description: "MIRASISONE services, works, and contact pages.",
+  metadataBase: new URL("https://www.mirasisone.com"),
+  title: {
+    default: "MIRASISONE",
+    template: "%s | MIRASISONE",
+  },
+  description:
+    "MIRASISONEは、プロジェクションマッピング・3DCG・AR / XRを活用し、空間体験の企画から制作・実装まで支援します。",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    siteName: "MIRASISONE",
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
