@@ -119,7 +119,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               return (
                 <div className="wix-article-inline-image" key={index}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={imageSrc} alt={block.alt} loading="lazy" />
+                  <img src={imageSrc} alt={block.alt} />
                 </div>
               );
             }
