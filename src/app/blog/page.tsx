@@ -29,10 +29,6 @@ export default function BlogPage() {
             {category}
           </Link>
         ))}
-        <button type="button" aria-label="続きを読む">
-          続きを読む
-          <span aria-hidden="true">˅</span>
-        </button>
       </nav>
 
       <section className="wix-post-list" aria-label="ブログ記事一覧">
