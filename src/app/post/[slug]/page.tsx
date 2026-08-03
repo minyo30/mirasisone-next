@@ -23,15 +23,15 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   return {
-    title: post.title,
+    title: `${post.title} | MIRASISONE`,
     description: post.description,
     alternates: {
-      canonical: `/post/${encodeURIComponent(post.slug)}`,
+      canonical: `/post/${encodeURIComponent(slug)}`,
     },
     openGraph: {
       title: `${post.title} | MIRASISONE`,
       description: post.description,
-      url: `/post/${encodeURIComponent(post.slug)}`,
+      url: `/post/${encodeURIComponent(slug)}`,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.revisedAt,
@@ -67,23 +67,88 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <Image src={post.eyecatch} alt="" fill sizes="(max-width: 900px) 100vw, 860px" priority />
         </div>
         <div className="wix-article-body">
-          {post.content.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          {post.content.map((block, index) => {
+            if (block.type === "heading") {
+              if (block.level === 2) return <h2 key={index}>{block.text}</h2>;
+              if (block.level === 3) return <h3 key={index}>{block.text}</h3>;
+              return <h4 key={index}>{block.text}</h4>;
+            }
+            if (block.type === "p") {
+              return <p key={index}>{block.text}</p>;
+            }
+            if (block.type === "list") {
+              return (
+                <ul key={index}>
+                  {block.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>{item}</li>
+                  ))}
+                </ul>
+              );
+            }
+            if (block.type === "table") {
+              const [header, ...rows] = block.rows;
+              return (
+                <div className="wix-article-table" key={index}>
+                  <table>
+                    {header ? (
+                      <thead>
+                        <tr>
+                          {header.map((cell, cellIndex) => (
+                            <th key={cellIndex}>{cell}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                    ) : null}
+                    <tbody>
+                      {rows.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, cellIndex) => (
+                            <td key={cellIndex}>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
+            if (block.type === "image") {
+              return (
+                <div className="wix-article-inline-image" key={index}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={block.src} alt={block.alt} loading="lazy" />
+                </div>
+              );
+            }
+            if (block.type === "quote") {
+              return <blockquote key={index}>{block.text}</blockquote>;
+            }
+            return null;
+          })}
         </div>
+        {post.tags && post.tags.length > 0 ? (
+          <div className="wix-article-tags">
+            {post.tags.map((tag) => (
+              <span className="wix-article-tag" key={tag}>
+                #{tag}
+              </span>
+            ))}
+          </div>
+        ) : null}
+        {related.length > 0 ? (
+          <section className="wix-related" aria-label="関連記事">
+            <h2>関連記事</h2>
+            <div className="wix-related-list">
+              {related.map((item) => (
+                <Link href={`/post/${encodeURIComponent(item.slug)}`} key={item.slug}>
+                  <span>{item.category}</span>
+                  <strong>{item.title}</strong>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </article>
-
-      <section className="wix-related" aria-label="関連記事">
-        <h2>関連記事</h2>
-        <div>
-          {related.map((item) => (
-            <Link href={`/post/${encodeURIComponent(item.slug)}`} key={item.slug}>
-              <span>{item.category}</span>
-              <strong>{item.title}</strong>
-            </Link>
-          ))}
-        </div>
-      </section>
     </main>
   );
 }
