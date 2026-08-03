@@ -18,20 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-function relativeDate(index: number) {
-  if (index === 0) {
-    return "1日前";
-  }
-
-  if (index === 1) {
-    return "3日前";
-  }
-
-  return blogPosts[index]?.publishedAt ?? "";
-}
-
 export default function BlogPage() {
-  const visiblePosts = blogPosts.slice(0, 14);
+  const visiblePosts = blogPosts;
 
   return (
     <main className="wix-blog-page" id="top">
@@ -43,7 +31,7 @@ export default function BlogPage() {
         ))}
         <button type="button" aria-label="続きを読む">
           続きを読む
-          <span aria-hidden="true">⌄</span>
+          <span aria-hidden="true">˅</span>
         </button>
       </nav>
 
@@ -55,7 +43,7 @@ export default function BlogPage() {
             </Link>
             <div className="wix-post-body">
               <div className="wix-post-topline">
-                <span>{relativeDate(index)}</span>
+                <span>{post.publishedAt}</span>
                 <button type="button" aria-label="記事メニュー">
                   ⋮
                 </button>
