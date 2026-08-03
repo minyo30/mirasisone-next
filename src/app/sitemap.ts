@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { seoUrlInventory } from "@/content/seo-url-inventory";
+import { blogPosts } from "@/content/blog";
 
 const baseUrl = "https://www.mirasisone.com";
 const implementedPaths = new Set(["/", "/works", "/contact", "/blog", "/company", "/recruit", "/privacy-policy"]);
@@ -15,8 +16,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: entry.path === "/" ? 1 : 0.9,
     }));
 
+  const postPages = blogPosts.map((post) => ({
+    url: `${baseUrl}/post/${encodeURIComponent(post.slug)}`,
+    lastModified: new Date(post.publishedAt || "2026-07-31"),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
     ...fixedPages,
+    ...postPages,
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date("2026-07-31"),
