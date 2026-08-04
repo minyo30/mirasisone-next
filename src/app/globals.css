@@ -382,9 +382,9 @@ body {
 .thanks-shell h1 {
   margin: 0;
   font-family: "Noto Serif JP", serif;
-  font-size: clamp(42px, 7vw, 86px);
+  font-size: clamp(32px, 4.8vw, 58px);
   font-weight: 900;
-  line-height: 1.18;
+  line-height: 1.35;
   letter-spacing: 0.02em;
 }
 
