@@ -321,6 +321,171 @@ body {
   font-family: "Noto Sans JP", sans-serif;
 }
 
+.thanks-page {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: clamp(40px, 8vw, 86px) 20px;
+  overflow: hidden;
+  color: #17182c;
+  background:
+    url("/contact-hero-bg.png") center top / cover repeat-y,
+    linear-gradient(160deg, #f7fbff 0%, #eef4ff 55%, #f8fbff 100%);
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.thanks-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(78, 205, 196, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 108, 246, 0.09) 1px, transparent 1px);
+  background-size: 76px 76px;
+  opacity: 0.86;
+  mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.78) 70%, transparent 100%);
+}
+
+.thanks-shell {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  padding: clamp(36px, 6vw, 76px);
+  border: 1px solid rgba(78, 205, 196, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 28px 84px rgba(74, 94, 148, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.thanks-shell::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: clamp(28px, 6vw, 72px);
+  width: min(320px, 45%);
+  height: 1px;
+  background: linear-gradient(90deg, #4ecdc4, rgba(123, 108, 246, 0));
+}
+
+.thanks-kicker {
+  margin: 0 0 20px;
+  color: #7b6cf6;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.thanks-shell h1 {
+  margin: 0;
+  font-family: "Noto Serif JP", serif;
+  font-size: clamp(42px, 7vw, 86px);
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+}
+
+.thanks-shell h1 span {
+  display: block;
+  width: fit-content;
+  margin-top: 0.08em;
+  background: linear-gradient(135deg, #4ecdc4 0%, #7b6cf6 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.thanks-rule {
+  display: flex;
+  align-items: center;
+  width: min(360px, 100%);
+  margin: 28px 0 30px;
+}
+
+.thanks-rule::before,
+.thanks-rule::after {
+  content: "";
+  height: 1px;
+  background: linear-gradient(90deg, rgba(78, 205, 196, 0.76), rgba(123, 108, 246, 0.25));
+}
+
+.thanks-rule::before {
+  flex: 1;
+}
+
+.thanks-rule::after {
+  width: 80px;
+}
+
+.thanks-rule span {
+  width: 7px;
+  height: 7px;
+  margin: 0 10px;
+  border-radius: 999px;
+  background: #7b6cf6;
+  box-shadow: 0 0 0 5px rgba(123, 108, 246, 0.1);
+}
+
+.thanks-lead {
+  margin: 0;
+  color: #253058;
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 800;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+
+.thanks-copy {
+  max-width: 720px;
+  margin: 20px 0 0;
+  color: #687592;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.9;
+  letter-spacing: 0.025em;
+}
+
+.thanks-copy span {
+  color: #253058;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+}
+
+.thanks-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.thanks-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 26px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.thanks-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, #4ecdc4 0%, #7b6cf6 100%);
+  box-shadow: 0 18px 42px rgba(123, 108, 246, 0.22);
+}
+
+.thanks-secondary {
+  color: #4ecdc4;
+  border: 1px solid rgba(78, 205, 196, 0.55);
+  background: rgba(255, 255, 255, 0.58);
+}
+
 .wix-blog-nav {
   display: flex;
   align-items: center;
@@ -1096,6 +1261,19 @@ body {
 
   .wix-related div {
     grid-template-columns: 1fr;
+  }
+
+  .thanks-page {
+    align-items: start;
+    padding-top: 46px;
+  }
+
+  .thanks-shell {
+    padding: 32px 24px;
+  }
+
+  .thanks-lead br {
+    display: none;
   }
 
   .blog-nav {

@@ -176,11 +176,8 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
             throw new Error(result.message || "送信に失敗しました。");
           }
 
-          if (button) {
-            button.textContent = "送信しました";
-            button.style.background = "#059669";
-          }
           form.reset();
+          window.location.href = "/thanks";
         } catch (error) {
           if (button) {
             button.textContent = error instanceof Error ? error.message : "送信に失敗しました";
