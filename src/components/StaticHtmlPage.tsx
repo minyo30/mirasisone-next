@@ -146,6 +146,63 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
       });
     }
 
+    function ensureContactFormSubmit() {
+      const submitHandler = async (event: SubmitEvent) => {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        if (!(form instanceof HTMLFormElement)) return false;
+
+        const button = form.querySelector<HTMLButtonElement>(".form-submit");
+        const originalText = button?.textContent ?? "送信する";
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        if (button) {
+          button.textContent = "送信中...";
+          button.disabled = true;
+          button.style.background = "";
+        }
+
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const result = (await response.json().catch(() => ({}))) as { message?: string };
+
+          if (!response.ok) {
+            throw new Error(result.message || "送信に失敗しました。");
+          }
+
+          if (button) {
+            button.textContent = "送信しました";
+            button.style.background = "#059669";
+          }
+          form.reset();
+        } catch (error) {
+          if (button) {
+            button.textContent = error instanceof Error ? error.message : "送信に失敗しました";
+            button.style.background = "#dc2626";
+            window.setTimeout(() => {
+              button.textContent = originalText;
+              button.style.background = "";
+              button.disabled = false;
+            }, 3500);
+          }
+        }
+
+        return false;
+      };
+
+      (
+        window as typeof window & {
+          handleContactPageSubmit?: (event: SubmitEvent) => Promise<boolean>;
+        }
+      ).handleContactPageSubmit = submitHandler;
+    }
+
     async function runScripts() {
       const scriptTags: readonly StaticScript[] =
         page.scriptTags ?? page.scripts.map((content) => ({ content }));
@@ -172,6 +229,7 @@ export function StaticHtmlPage({ page, contactLinks = false }: StaticHtmlPagePro
 
       if (!cancelled) {
         ensureProjectionValueHover();
+        ensureContactFormSubmit();
       }
     }
 
