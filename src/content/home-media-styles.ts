@@ -1,6 +1,8 @@
 /** Shared photo frames; source dimensions never determine the card layout. */
 export const homeMediaStyles = String.raw`
 body #home-page { --home-photo-ratio: 4 / 3; --home-thumb-width: 88px; --home-thumb-gap: 16px; }
+/* 記事のアイキャッチは 16:9。4:3 に収めると左右が切れるため、この枠だけ横長にする */
+body #home-page #updates { --home-photo-ratio: 16 / 9; --home-thumb-width: 132px; }
 body #home-page #services .svc-new-visual,
 body #home-page #why-us .why-editorial-photo,
 body #home-page #updates .news-img-wrap,
