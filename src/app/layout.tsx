@@ -40,15 +40,13 @@ export default function RootLayout({
         {children}
         <Script src="https://unpkg.com/@phosphor-icons/web" strategy="afterInteractive" />
 
-        {/* TODO: GA4 導入 — クライアントから Measurement ID（G-XXXXXXXXXX）を受け取ったら
-            下記2行のコメントアウトを外して G-XXXXXXXXXX を実際の ID に書き換える */}
-        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3TVCRYEEPG" strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-XXXXXXXXXX');
-        `}</Script> */}
+          gtag('config', 'G-3TVCRYEEPG');
+        `}</Script>
       </body>
     </html>
   );
