@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { appUrl } from "@/content/site";
+import LeadEvent from "./LeadEvent";
 
 export const metadata: Metadata = {
   title: "THANKS",
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function ThanksPage() {
   return (
     <main className="thanks-page">
+      <LeadEvent />
       <div className="thanks-grid" aria-hidden="true" />
       <section className="thanks-shell">
         <p className="thanks-kicker">Thank You</p>
