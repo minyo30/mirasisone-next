@@ -36,20 +36,11 @@
     "height": 360
   },
   {
-    "title": "YAKINIKU 37",
+    "title": "YAKINIKU 37 west NY",
     "category": "プロジェクションマッピング",
-    "alt": "花の映像が投影されたYAKINIKU 37のダイニングテーブル",
-    "image": "/images/works/yakiniku37.webp",
+    "alt": "壁とテーブルに誕生日の映像を投影したYAKINIKU 37 west NYの店内",
+    "image": "/images/works/yakiniku37-west.webp",
     "href": "https://www.instagram.com/mirasisone/reel/DP6Awk_EvZ4/?hl=ja",
-    "width": 360,
-    "height": 270
-  },
-  {
-    "title": "SHISHA BOUTIQUE FREAKS",
-    "category": "プロジェクションマッピング",
-    "alt": "ランタンの光を映し出すSHISHA BOUTIQUE FREAKSの店内",
-    "image": "/images/works/shisha-freaks.webp",
-    "href": "https://www.foriio.com/Mirasisone2022/wk_AYXapxW4v3HYv9iBJK3xFnRgcrAmlJzvB2mCrx16e0HY9HiEtQ",
     "width": 960,
     "height": 540
   },
@@ -88,5 +79,59 @@
     "href": "https://www.foriio.com/Mirasisone2022/wk_ARdBVV-1peDJds-WwTfaXUuHtDCRrGmdmzBHlHp2qa8CjgLV3Q",
     "width": 960,
     "height": 540
+  },
+  {
+    "title": "お絵描きコンテンツ",
+    "category": "プロジェクションマッピング",
+    "alt": "来場者が描いた絵が、桜と花火の映像に重なって動き出す投影コンテンツ",
+    "image": "/images/works/oekaki.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_AUPmIyzZwgEOLqI9w4dBN3yi1hQnuRE9vWPx-alf3o-zCULcZQ",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "title": "オムサコライス",
+    "category": "プロジェクションマッピング",
+    "alt": "ドーム型の天井一面に魚の映像を投影した店内",
+    "image": "/images/works/omusako.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_AYwaNJDtPT4uXSdKukzxvmwGGlMD4nNiQc7L3A3tZU9mwTzpMw",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "title": "Maiami",
+    "category": "3DCG",
+    "alt": "海沿いの道を走るスポーツカーのCG映像",
+    "image": "/images/works/maiami.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_AS5u1Eh0j8ZMRrZcB5dxVktBSSvDioUWu4T5PCsHlw6Zf3Bmqg",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "title": "リンガーハット CM",
+    "category": "3DCG",
+    "alt": "餃子が勢いよく飛び出すCMの3DCG映像",
+    "image": "/images/works/ringerhut.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_ATdtlbPdj4qdiIvhA6hoIx19pkfGLsphWdYH1cdJ8YmEgiCzTw",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "title": "新大久保サイネージ",
+    "category": "3DCG",
+    "alt": "街頭の2面ビジョンに映し出された白虎とチーズハットグのCG",
+    "image": "/images/works/shin-okubo-signage.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_AY_-dCpMxDoNQMbFjTSTBeu6NCdkdbeyqGNGB2JFXP1Q_dkaUQ",
+    "width": 960,
+    "height": 540
+  },
+  {
+    "title": "SENSHIN CLINIC 商品PV",
+    "category": "3DCG",
+    "alt": "研究室で顕微鏡をのぞく研究者を映した商品PVの一場面",
+    "image": "/images/works/senshin-clinic.webp",
+    "href": "https://www.foriio.com/Mirasisone2022/wk_AZnBGYg1q9_ur6iolVe3_R7egoqEFAOQwc7nbR0Xa0IO8oRU0g",
+    "width": 640,
+    "height": 480
   }
 ]
