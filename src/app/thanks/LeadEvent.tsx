@@ -6,13 +6,32 @@ type GtagWindow = Window & {
   gtag?: (...args: unknown[]) => void;
 };
 
+const DEDUPE_KEY = 'lead_sent_at';
+const DEDUPE_WINDOW_MS = 10 * 60 * 1000;
+
 export default function LeadEvent() {
   useEffect(() => {
+    // Reaching this page from another page of our own site is a visit, not a
+    // submission. An empty or external referrer is treated as a submission so a
+    // real lead is never dropped when the browser withholds the referrer.
+    const referrer = document.referrer;
+    if (referrer.startsWith(window.location.origin)) {
+      let path = '';
+      try {
+        path = new URL(referrer).pathname;
+      } catch {
+        // Malformed referrer; fall through and treat it as a submission.
+      }
+      if (path && !path.startsWith('/contact')) return;
+    }
+
+    // Guard against reloads, but let a genuine later enquiry still count.
     try {
-      if (sessionStorage.getItem('lead_sent')) return;
-      sessionStorage.setItem('lead_sent', '1');
+      const last = Number(window.sessionStorage.getItem(DEDUPE_KEY) || 0);
+      if (last && Date.now() - last < DEDUPE_WINDOW_MS) return;
+      window.sessionStorage.setItem(DEDUPE_KEY, String(Date.now()));
     } catch {
-      // sessionStorage is unavailable (private mode etc.); still send the event
+      // sessionStorage is unavailable (private mode etc.); still send the event.
     }
 
     const send = () => {
