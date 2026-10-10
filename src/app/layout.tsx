@@ -40,12 +40,12 @@ export default function RootLayout({
         {children}
         <Script src="https://unpkg.com/@phosphor-icons/web" strategy="afterInteractive" />
 
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-3TVCRYEEPG" strategy="afterInteractive" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-37LHBTLMGH" strategy="afterInteractive" />
         <Script id="ga4-init" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-3TVCRYEEPG');
+          gtag('config', 'G-37LHBTLMGH');
         `}</Script>
       </body>
     </html>
